@@ -233,6 +233,11 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
                     TableInfo info = measurer.measure(tableData, config);
                     xAxis.setHeight(info.getTopHeight());
                     yAxis.setWidth(info.getyAxisWidth());
+                    //刷新之前设置回之前的缩放倍率
+                    float zoom = getMatrixHelper().getZoom();
+                    config.setZoom(zoom);
+                    tableData.getTableInfo().setZoom(zoom);
+
                     requestReMeasure();
                     postInvalidate();
                     isNotifying.set(false);
@@ -258,8 +263,13 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    float zoom = getMatrixHelper().getZoom();
+                    config.setZoom(1);
+                    tableData.getTableInfo().setZoom(1);
                     parser.addData(tableData, t, isFoot);
                     measurer.measure(tableData, config);
+                    config.setZoom(zoom);
+                    tableData.getTableInfo().setZoom(zoom);
                     requestReMeasure();
                     postInvalidate();
                     isNotifying.set(false);
