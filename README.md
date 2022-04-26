@@ -82,7 +82,7 @@
 allprojects {
 		repositories {
 			...
-			maven { url 'https://www.jitpack.io' }
+			maven { url 'https://jitpack.io' }
 		}
 	}
 ```
@@ -91,7 +91,7 @@ allprojects {
 
 ```gradle
 dependencies {
-	        compile 'com.github.huangyanbin:SmartTable:2.2.0'
+		implementation 'com.github.MrDon94:smartTable:2.2.1'
 	}
 ```
      如果你不需要数组转列功能，你可以使用1.7.1版本，需要的话，请使用最新版本2.2.0
